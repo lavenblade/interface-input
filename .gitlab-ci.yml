@@ -1,0 +1,23 @@
+image: centos:latest
+
+variables:
+    BYOND_DME: "$CI_PROJECT_DIR/RPG Framework.dme"
+    BYOND_FILENAME: "byond_linux.zip"
+    BYOND_DOWNLOAD: "http://www.byond.com/download/build/511/511.1385_byond_linux.zip"
+
+stages:
+    - build
+
+build:
+    stage: build
+    before_script:
+        - yum -y upgrade
+        - yum -y install make unzip libstdc++.i686
+        - curl -o "$BYOND_FILENAME" -L "$BYOND_DOWNLOAD"
+        - unzip "$BYOND_FILENAME"
+        - cd byond && make here
+        - source "$CI_PROJECT_DIR/byond/bin/byondsetup"
+    script:
+        - DreamMaker "$BYOND_DME"
+    only:
+        - master
