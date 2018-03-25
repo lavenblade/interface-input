@@ -1,7 +1,7 @@
 image: centos:latest
 
 variables:
-    BYOND_DME: "$CI_PROJECT_DIR/RPG Framework.dme"
+    BYOND_DME: "$CI_PROJECT_DIR/Interface Input.dme"
     BYOND_FILENAME: "byond_linux.zip"
     BYOND_DOWNLOAD: "http://www.byond.com/download/build/511/511.1385_byond_linux.zip"
 
