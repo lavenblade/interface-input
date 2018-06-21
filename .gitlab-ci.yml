@@ -18,6 +18,7 @@ build:
         - cd byond && make here
         - source "$CI_PROJECT_DIR/byond/bin/byondsetup"
     script:
+        - DreamDownload byond://lavenblade.interfacequery
         - DreamMaker "$BYOND_DME"
     only:
         - master
