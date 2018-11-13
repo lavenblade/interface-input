@@ -1,24 +1,14 @@
-image: centos:latest
+image: tgstation/byond:latest
 
 variables:
-    BYOND_DME: "$CI_PROJECT_DIR/Interface Input.dme"
-    BYOND_FILENAME: "byond_linux.zip"
-    BYOND_DOWNLOAD: "http://www.byond.com/download/build/511/511.1385_byond_linux.zip"
+    BYOND_DME: "Interface Input.dme"
 
 stages:
     - build
 
 build:
     stage: build
-    before_script:
-        - yum -y upgrade
-        - yum -y install make unzip libstdc++.i686
-        - curl -o "$BYOND_FILENAME" -L "$BYOND_DOWNLOAD"
-        - unzip "$BYOND_FILENAME"
-        - cd byond && make here
-        - source "$CI_PROJECT_DIR/byond/bin/byondsetup"
     script:
-        - DreamDownload byond://lavenblade.interfacequery
-        - DreamMaker "$BYOND_DME"
+        - DreamMaker "$CI_PROJECT_DIR/$BYOND_DME"
     only:
         - master
