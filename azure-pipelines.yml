@@ -1,0 +1,32 @@
+trigger:
+- master
+- develop
+
+variables:
+- group: 'repository-mirror-configuration'
+
+jobs:
+- job: 'RepositoryMirror'
+  displayName: 'Repository Mirror'
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  steps:
+    - script: |
+        git clone --mirror https://DougParker1992:$(System.AccessToken)@dev.azure.com/Lavenblade/Interface-Input/_git/Interface-Input
+      displayName: 'Clone main repository'
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+    - script: |
+        cd Interface-Input.git
+        git push --mirror https://$(github-username):$(github-personal-access-token)@github.com/DougParker1992/BYOND-Interface-Input.git
+      displayName: 'Push mirror to GitHub'
+    
+    - script: |
+        cd Interface-Input.git
+        git push --mirror https://$(gitlab-username):$(gitlab-personal-access-token)@gitlab.com/Lavenblade/Interface-Input.git
+      displayName: 'Push mirror to GitLab'
+    
+    - script: |
+        rm -rf Interface-Input.git
+      displayName: 'Clean up file artifacts'
