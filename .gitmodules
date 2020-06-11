@@ -1,0 +1,3 @@
+[submodule "Library/Lavenblade/Interface-Query"]
+	path = Library/Lavenblade/Interface-Query
+	url = https://git.douglas-parker.com/Lavenblade/Interface-Query.git
