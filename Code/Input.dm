@@ -106,6 +106,7 @@ Input
 				else
 					src.client.prompts-=src
 					src.input=winget(src.client, "[src.id].Input","text")
+					if(text2num(src.input)) src.input = text2num(src.input)
 					winset(src.client, "[src.id]", "parent=none")
 					return src.button
 
